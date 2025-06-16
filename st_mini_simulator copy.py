@@ -300,7 +300,7 @@ def type_of_calculation():
 
                 if graph_type == "Explore common substances":
                     table = [] #preparing table for appending
-                    with open("Simulator_streamlit/list_of_boiling_points_and_heat_of_vap.csv", "r", encoding = "utf-8") as file: #open the csv file
+                    with open("list_of_boiling_points_and_heat_of_vap.csv", "r", encoding = "utf-8") as file: #open the csv file
                         reader = csv.DictReader(file)
                         for row in reader: #arranging the components inside the csv into a table
                             table.append({"Compound": row["Compound"],
@@ -505,7 +505,7 @@ def type_of_calculation():
 
             if ask_user == "Temperature against Distance graph of different materials":
                 table = [] #preparing a list for appending
-                with open("Simulator_streamlit/list_of_thermal_conductivities.csv","r", encoding = "utf-8") as file: #open csv
+                with open("list_of_thermal_conductivities.csv","r", encoding = "utf-8") as file: #open csv
                     reader = csv.DictReader(file)
                     for row in reader:
                         table.append({"Material": row["Material"],
@@ -570,7 +570,7 @@ def type_of_calculation():
 
             if ask_user == "Power against Temperature graph of different materials":
                 table = [] #preparing a list for appending
-                with open("Simulator_streamlit/list_of_emissivities.csv","r") as file: #open csv
+                with open("list_of_emissivities.csv","r") as file: #open csv
                     reader = csv.DictReader(file)
                     for row in reader:
                         table.append({"Material": row["Material"],
