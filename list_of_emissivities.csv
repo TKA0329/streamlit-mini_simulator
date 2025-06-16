@@ -1,0 +1,27 @@
+Material,Emissivity at 300 K
+Aluminium foil,0.03
+"Aluminium, anodized",0.9
+"Aluminium, smooth, polished",0.04
+"Aluminium, rough, oxidized",0.2
+Asphalt,0.88
+Brick,0.90
+"Concrete, rough",0.91
+"Copper, polished",0.04
+"Copper, oxidized",0.87
+"Glass, smooth uncoated",0.95
+Ice,0.97-0.99
+"Iron, polished",0.06
+Limestone,0.92
+"Marble, polished",0.905
+"Nitrogen or Oxygen gas layer, pure",0
+"Paint, including white",0.9
+"Paper, roofing or white",0.87
+"Plaster, rough",0.89
+"Silver, polished",0.02
+"Silver, oxidized",0.04
+"Skin, human",0.985
+Snow,0.85
+Polytetrafluoroethylene (Teflon),0.85
+Transition metal disilicides (e.g. MoSi2 or WSi2),0.895
+Vegetation,0.94
+"Water, pure",0.96
