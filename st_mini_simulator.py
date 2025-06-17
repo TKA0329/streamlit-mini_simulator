@@ -673,7 +673,7 @@ def type_of_calculation():
             renewable_energies = ["Hydrogen* (HHV)☘️", "Hydrogen* (LHV)☘️", "Vegetable Oil☘️", "Biodiesel☘️"] 
 
             fuel_names = list(table_substance.keys())
-            colors = matplotlib.colormaps.get_cmap("tab20", len(fuel_names))
+            colors = cm.get_cmap("tab20", len(fuel_names))
             fuel_color_map = {fuel: colors(i) for i, fuel in enumerate(fuel_names)}
 
             val_based = {k: v for k, v in sorted(table_substance.items(), key=lambda item:item[1]["Energy Content (MJ/kg)"])}
