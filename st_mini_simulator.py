@@ -10,8 +10,8 @@ import matplotlib.cm as cm
 import matplotlib.colors as mcolors
 import csv
 
-st.title("Mini Reaction Kinetics and Heat Transfer Simulator")
-type_of_cal = st.selectbox("Heat Transfer or Reaction Kinetics:", ["Heat Transfer", "Reaction Kinetics", "GHG Impact Simulator"])
+st.title("Mini Simulator for Reaction Kinetics, Heat Transfer and Greenhouse Gas Impact ")
+type_of_cal = st.selectbox("Heat Transfer or Reaction Kinetics:", ["Heat Transfer", "Reaction Kinetics", "Greenhouse Gas Impact"])
 
 def type_of_calculation():
     if type_of_cal == "Reaction Kinetics":
@@ -627,7 +627,7 @@ def type_of_calculation():
             rate_of_heat_transfer = h * A *delta_T
             st.info(f"Rate of energy transfer = {rate_of_heat_transfer} W")
     
-    if type_of_cal == "GHG Impact Simulator":
+    if type_of_cal == "Greenhouse Gas Impact":
         cal_or_bar = st.selectbox("Calculate Amount of Carbon Dioxide Emitted or Compare Carbon Emissions (Bar Graph)?", ["Compare Carbon Emissions (Bar Graph)", "Calculate Amount of Carbon Dioxide Emitted"])
         table = [] #preparing a list for appending
         with open("list_of_fuels.csv","r", encoding = "utf-8") as file: #open csv
@@ -652,6 +652,10 @@ def type_of_calculation():
             carbon_emitted = amount_of_energy * mass * carbon_emissions_cal
             st.info(f"{mass}kg of the fuel emitted {round(carbon_emitted/1000,3)}kg of CO₂.")
             st.info(f"🌳 To offset {round(carbon_emitted/1000,3)}kg of CO₂, you would need approximately {round(carbon_emitted/1000/26.635)} trees!")
+            methane_emissions_cal = st.number_input("Methane emissions in gCH4/MJ: ")
+            methane_emitted = amount_of_energy * mass * methane_emissions_cal
+            st.info(f"{mass}kg of the fuel emitted {round(methane_emitted/1000,3)}kg of CO₂.")
+            st.info(f"Over a 20-year period, methane is estimated to be 80 times more potent than CO2 when it comes to warming the planet.\n Hence, the calculated amount of methane is equivalent to {round(methane_emitted/1000,2)} * 80 kg of CO2.")
 
         if cal_or_bar == "Compare Carbon Emissions (Bar Graph)":
             table_substance = {}
