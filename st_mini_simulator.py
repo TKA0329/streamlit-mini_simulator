@@ -177,11 +177,14 @@ def type_of_calculation():
                     ax.legend()
                     st.pyplot(fig)
 
+                    st.subheader("Download File")
                     format = st.selectbox("File Format:", ["---Please select---", "png", "jpeg", "pdf"])
                     if format != "---Please select---":
                         buf = io.BytesIO()
                         fig.savefig(buf, format = format)
                         buf.seek(0)
+                    else:
+                        st.warning("Please select a file format.")
 
                     file_name = st.text_input("File name: ", value = f"kinetics_plot.{format}")
                     if format == "png" or format == "jpeg":
@@ -240,6 +243,18 @@ def type_of_calculation():
         helper()
     if type_of_cal == "Heat Transfer":
         st.info("Note: The item in brackets shows the parameter this option will calculate.")
+        st.markdown("##### Types of calculations supported: ")
+        table_type = ["1. Sensible Heating or Cooling (heat removed/added or final temperature)",
+             "2. Phase Changes with known heat of vaporisation (Rate of heat transfer)",
+             "3. Phase Changes with no known heat of vaporisation (graphing available!)(Heat of vaporisation + Rate of heat transfer)",
+             "4. Chemical Reactions (heat added/removed)",
+             "5. Heat Transfer Area of Exchanger (area of exchanger)",
+             "6. Conduction - Fourier’s law (graphing available!)(rate of heat transfer)",
+             "7. Radiation - Stefan-Boltzmann Law (graphing available!)(rate of heat transfer)",
+             "8. Convective Heat Transfer (rate of heat transfer)"]
+        df = pd.DataFrame(table_type) 
+        st.dataframe(df)
+        
         calculation = st.selectbox("Choose the type of calculation from the following:", ["---Please select---", "1. Sensible Heating or Cooling (heat removed/added or final temperature)",
              "2. Phase Changes with known heat of vaporisation (Rate of heat transfer)",
              "3. Phase Changes with no known heat of vaporisation (graphing available!)(Heat of vaporisation + Rate of heat transfer)",
