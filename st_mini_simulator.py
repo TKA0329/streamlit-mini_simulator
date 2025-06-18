@@ -254,7 +254,7 @@ def type_of_calculation():
              "8. Convective Heat Transfer (rate of heat transfer)"]
         table_ = []
         for eqn in table_type:
-            table_.append({table_type:eqn})
+            table_.append({"Type of Calculation":eqn})
         df = pd.DataFrame(table_) 
         st.dataframe(df)
         
