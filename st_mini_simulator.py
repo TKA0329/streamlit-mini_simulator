@@ -177,19 +177,18 @@ def type_of_calculation():
                     ax.legend()
                     st.pyplot(fig)
 
-                    buf = io.BytesIO()
                     format = st.selectbox("File Format:", ["---Please select---", "png", "jpeg", "pdf"])
-                    fig.savefig(buf, format = format)
-                    buf.seek(0)
+                    if format != "---Please select---":
+                        buf = io.BytesIO()
+                        fig.savefig(buf, format = format)
+                        buf.seek(0)
 
                     file_name = st.text_input("File name: ", value = f"kinetics_plot.{format}")
                     if format == "png" or format == "jpeg":
                         st.download_button(label = "Download image", data = buf, file_name = f"{file_name}", mime=f"image/{format}")
                     elif format == "pdf":
                         st.download_button(label = "Download image", data = buf, file_name = f"{file_name}", mime="application/pdf")
-                    elif format == "---Please select---":
-                        return
-
+        
                 elif style == "Animated":
                     if not time:
                         return
