@@ -52,6 +52,8 @@ def type_of_calculation():
                     st.warning("Rate and concentration cannot be less than 0!")
                     return
                 order_selected = st.selectbox("Order with respect to the substance? Please select from the following:", ["---Please select---", 0.0, 1.0, 2.0])
+                if order_selected == "---Please select---":
+                    return
                 k = rate/(concentration ** order_selected)
                 st.session_state.k = k
 
@@ -65,7 +67,11 @@ def type_of_calculation():
             k = st.session_state.get("k", None)
             A0 = st.number_input("Initial concentration (mol/L):", min_value=0.0)
             order = st.selectbox("Order of Reaction:", ["---Please select---", "Zero", "First", "Second"])
-            st.info(f"Order selected: {order} Order")
+            if order == "---Please select---":
+                st.warning("Please select an order!")
+                return
+            else:
+                st.info(f"Order selected: {order} Order")
             st.markdown("##### Product's Information")
             ratio = st.number_input("What is the ratio of the product to the reactant?", min_value = 0.0)
 
@@ -494,7 +500,7 @@ def type_of_calculation():
             if A < 0:
                 st.warning("The area cannot be less than zero!")
 
-        if calculation == "6. Conduction (Fourier’s law) (graphing available!)(rate of heat transfer)":
+        if calculation == "6. Conduction - Fourier’s law (graphing available!)(rate of heat transfer)":
             ask_user = st.selectbox("(1) Temperature against Distance graph of different materials or (2) calculate rate of energy transfer?", ["---Please select---", "Temperature against Distance graph of different materials", "Calculate rate of energy transfer"])
             if ask_user == "Calculate rate of energy transfer":
                 st.subheader("Calculation using the Fourier's Law")
@@ -560,7 +566,7 @@ def type_of_calculation():
                 ax.legend()
                 st.pyplot(fig)
 
-        if calculation == "7. Radiation (Stefan-Boltzmann Law) (graphing available!)(rate of heat transfer)":
+        if calculation == "7. Radiation - Stefan-Boltzmann Law (graphing available!)(rate of heat transfer)":
             ask_user = st.selectbox("(1) Power against Temperature graph of different materials or (2) calculate rate of energy transfer?", ["---Please select---", "Power against Temperature graph of different materials", "Calculate rate of energy transfer"])
             if ask_user == "Calculate rate of energy transfer":
                 st.subheader("Calculation using the Stefan-Boltzmann Law")
