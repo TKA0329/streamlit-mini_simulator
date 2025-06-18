@@ -11,7 +11,7 @@ import matplotlib.colors as mcolors
 import csv
 
 st.title("Mini Simulator for Reaction Kinetics, Heat Transfer and Greenhouse Gas Impact ")
-type_of_cal = st.selectbox("Heat Transfer, Reaction Kinetics or Greenhouse Gas Impact?:", ["---Please select---", "Heat Transfer", "Reaction Kinetics", "Greenhouse Gas Impact"])
+type_of_cal = st.selectbox("Heat Transfer, Reaction Kinetics or Greenhouse Gas Impact?:", ["---Please select---", "Heat Transfer", "Reaction Kinetics", "Greenhouse Gas Impact"], fontsize = 20)
 
 def type_of_calculation():
     if type_of_cal == "---Please select---":
