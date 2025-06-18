@@ -244,13 +244,14 @@ def type_of_calculation():
     if type_of_cal == "Heat Transfer":
         st.markdown("##### Types of calculations supported: ")
         st.info("Note: The item in brackets shows the parameter this option will calculate.")
+        st.info("Note: 📈 means graphing is available for this option.")
         table_type = ["1. Sensible Heating or Cooling (heat removed/added or final temperature)",
              "2. Phase Changes with known heat of vaporisation (Rate of heat transfer)",
-             "3. Phase Changes with no known heat of vaporisation (graphing available!)(Heat of vaporisation + Rate of heat transfer)",
+             "3. Phase Changes with no known heat of vaporisation 📈 (Heat of vaporisation + Rate of heat transfer)",
              "4. Chemical Reactions (heat added/removed)",
              "5. Heat Transfer Area of Exchanger (area of exchanger)",
-             "6. Conduction - Fourier’s law (graphing available!)(rate of heat transfer)",
-             "7. Radiation - Stefan-Boltzmann Law (graphing available!)(rate of heat transfer)",
+             "6. Conduction - Fourier’s law 📈 (rate of heat transfer)",
+             "7. Radiation - Stefan-Boltzmann Law 📈 (rate of heat transfer)",
              "8. Convective Heat Transfer (rate of heat transfer)"]
         table_ = []
         for eqn in table_type:
