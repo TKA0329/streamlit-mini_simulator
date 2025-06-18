@@ -18,7 +18,7 @@ def type_of_calculation():
         st.subheader("Hello! This is a lightweight, interactive tool to simulate selected introductory concepts in Chemical Engineering.")
         st.markdown("#### Here, you can explore: \n ##### 1. Reaction kinetics (Zero, First and Second-order reactions; custom molar ratios.) \n ##### 2. Heat Transfer Calculations (supports graphing to compare materials in phase changes, conduction and radiation) \n ##### 3. Greenhouse Gas Impact (calculates CO₂ and methane emissions, supports graphing to compare properties of fuels)")
         st.markdown("#### Enjoy!")
-        
+
     if type_of_cal == "Reaction Kinetics":
         st.subheader("Calculating the Rate Constant")
         def get_k():
@@ -639,7 +639,7 @@ def type_of_calculation():
             reader = csv.DictReader(file)
             for row in reader:
                 table.append({"Fuel": row["Fuel"],
-                                "Energy Content (MJ/kg)":row["Energy Content (MJ/kg)"], "Carbon Emissions (gCO2/MJ)":row["Carbon Emissions (gCO2/MJ)"]})
+                                "Energy Content (MJ/kg)":row["Energy Content (MJ/kg)"], "Carbon Emissions (gCO₂/MJ)":row["Carbon Emissions (gCO₂/MJ)"]})
         st.subheader("Table: Fuel, Energy Content and Carbon Emissions")
         df = pd.DataFrame(table)
         st.dataframe(df)
@@ -650,7 +650,7 @@ def type_of_calculation():
             st.subheader("Amount of Carbon Dioxide Emitted Calculator")
             amount_of_energy = st.number_input("Based on the table above or your own value, energy content of the fuel (MJ/kg):", min_value = 0.0)
             mass = st.number_input("Mass of the fuel consumed (kg): ", min_value = 0.0)
-            carbon_emissions_cal = st.number_input("Based on the table above or your own value, carbon emissions (gCO2/MJ): ", min_value = 0.0)
+            carbon_emissions_cal = st.number_input("Based on the table above or your own value, carbon emissions (gCO₂/MJ): ", min_value = 0.0)
             if amount_of_energy == 0 or mass == 0:
                 st.warning("Energy content and Mass cannot be 0!")
                 return
@@ -675,8 +675,8 @@ def type_of_calculation():
                 for item in table:
                     if substance == item["Fuel"]:
                         energy_content = float(item["Energy Content (MJ/kg)"])
-                        carbon_emissions = float(item["Carbon Emissions (gCO2/MJ)"])
-                        table_substance[item["Fuel"]] = {"Energy Content (MJ/kg)": energy_content, "Carbon Emissions (gCO2/MJ)": carbon_emissions}
+                        carbon_emissions = float(item["Carbon Emissions (gCO₂/MJ)"])
+                        table_substance[item["Fuel"]] = {"Energy Content (MJ/kg)": energy_content, "Carbon Emissions (gCO₂/MJ)": carbon_emissions}
 
             fig1, ax1 = plt.subplots(figsize = (12,6))
             renewable_energies = ["Hydrogen* (HHV)☘️", "Hydrogen* (LHV)☘️", "Vegetable Oil☘️", "Biodiesel☘️"] 
@@ -708,12 +708,12 @@ def type_of_calculation():
             fig2, ax2 = plt.subplots(figsize = (12,6))
             
             #table substance contains dicts within a dict, you need to specify which item in the 2nd dict to access 
-            val_based = {k: v for k, v in sorted(table_substance.items(), key=lambda item:item[1]["Carbon Emissions (gCO2/MJ)"])}
+            val_based = {k: v for k, v in sorted(table_substance.items(), key=lambda item:item[1]["Carbon Emissions (gCO₂/MJ)"])}
             
             for fuel, energy_con in val_based.items():
                 Fuel = [fuel] #fuel gets the key, energy_con gets the value
-                Energy2 = [energy_con["Carbon Emissions (gCO2/MJ)"]]
-                energy_2 = energy_con["Carbon Emissions (gCO2/MJ)"]
+                Energy2 = [energy_con["Carbon Emissions (gCO₂/MJ)"]]
+                energy_2 = energy_con["Carbon Emissions (gCO₂/MJ)"]
                 color = fuel_color_map[fuel]
                 bars2 = ax2.bar(Fuel, Energy2, width = 0.3, color=color)
                 ax2.bar_label(bars2, label_type = "edge", color = "blue")
@@ -723,7 +723,7 @@ def type_of_calculation():
             
             #graph's info
             ax2.set_xlabel("Fuel")
-            ax2.set_ylabel("Carbon Emissions (gCO2/MJ)")
+            ax2.set_ylabel("Carbon Emissions (gCO₂/MJ)")
             ax2.tick_params(axis = "x", labelrotation=45)
             plot_title = st.text_input("Graph's title: ", key = "C")
             ax2.set_title(f"{plot_title}")
