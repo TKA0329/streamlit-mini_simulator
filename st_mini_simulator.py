@@ -628,7 +628,7 @@ def type_of_calculation():
             st.info(f"Rate of energy transfer = {rate_of_heat_transfer} W")
     
     if type_of_cal == "Greenhouse Gas Impact":
-        cal_or_bar = st.selectbox("Calculate Amount of Carbon Dioxide Emitted or Compare Carbon Emissions (Bar Graph)?", ["Compare Carbon Emissions (Bar Graph)", "Calculate Amount of Carbon Dioxide Emitted"])
+        cal_or_bar = st.selectbox("---Please select---","Calculate Amount of Carbon Dioxide and Methane Emitted or Compare Carbon Emissions (Bar Graph)?", ["Compare Carbon Emissions (Bar Graph)", "Calculate Amount of Carbon Dioxide Emitted"])
         table = [] #preparing a list for appending
         with open("list_of_fuels.csv","r", encoding = "utf-8") as file: #open csv
             reader = csv.DictReader(file)
@@ -641,7 +641,7 @@ def type_of_calculation():
         st.write("*Assumes green hydrogen. No direct CO₂ emissions upon use.")
         st.write("Note: ☘️ means it is a renewable energy!")
         
-        if cal_or_bar == "Calculate Amount of Carbon Dioxide Emitted":
+        if cal_or_bar == "Calculate Amount of Carbon Dioxide and Methane Emitted":
             st.subheader("Amount of Carbon Dioxide Emitted Calculator")
             amount_of_energy = st.number_input("Based on the table above or your own value, energy content of the fuel (MJ/kg):", min_value = 0.0)
             mass = st.number_input("Mass of the fuel consumed (kg): ", min_value = 0.0)
