@@ -16,8 +16,9 @@ type_of_cal = st.selectbox("Heat Transfer, Reaction Kinetics or Greenhouse Gas I
 def type_of_calculation():
     if type_of_cal == "---Please select---":
         st.subheader("Hello! This is a lightweight, interactive tool to simulate selected introductory concepts in Chemical Engineering.")
-        st.markdown("#### Here, you can explore: \n ##### 1. Reaction kinetics (Zero, First and Second-order reactions; custom molar ratios.)")
-
+        st.markdown("#### Here, you can explore: \n ##### 1. Reaction kinetics (Zero, First and Second-order reactions; custom molar ratios.) \n ##### 2. Heat Transfer Calculations (supports graphing to compare materials in phase changes, conduction and radiation) \n ##### 3. Greenhouse Gas Impact (calculates CO₂ and methane emissions, supports graphing to compare properties of fuels)")
+        st.markdown("#### Enjoy!")
+        
     if type_of_cal == "Reaction Kinetics":
         st.subheader("Calculating the Rate Constant")
         def get_k():
@@ -639,7 +640,7 @@ def type_of_calculation():
             for row in reader:
                 table.append({"Fuel": row["Fuel"],
                                 "Energy Content (MJ/kg)":row["Energy Content (MJ/kg)"], "Carbon Emissions (gCO2/MJ)":row["Carbon Emissions (gCO2/MJ)"]})
-        st.subheader("Table: Material, Energy Content and Carbon Emissions")
+        st.subheader("Table: Fuel, Energy Content and Carbon Emissions")
         df = pd.DataFrame(table)
         st.dataframe(df)
         st.write("*Assumes green hydrogen. No direct CO₂ emissions upon use.")
@@ -658,8 +659,8 @@ def type_of_calculation():
             st.info(f"🌳 To offset {round(carbon_emitted/1000,3)}kg of CO₂, you would need approximately {round(carbon_emitted/1000/26.635)} trees!")
             methane_emissions_cal = st.number_input("Methane emissions in gCH4/MJ: ")
             methane_emitted = amount_of_energy * mass * methane_emissions_cal
-            st.info(f"{mass}kg of the fuel emitted {round(methane_emitted/1000,3)}kg of CO₂.")
-            st.info(f"Over a 20-year period, methane is estimated to be 80 times more potent than CO2 when it comes to warming the planet.\n Hence, the calculated amount of methane is equivalent to {round(methane_emitted/1000 * 80, 2)}  kg of CO2.")
+            st.info(f"{mass}kg of the fuel emitted {round(methane_emitted/1000,3)}kg of CH₄.")
+            st.info(f"Over a 20-year period, methane is estimated to be 80 times more potent than CO₂ when it comes to warming the planet.\n Hence, the calculated amount of methane is equivalent to {round(methane_emitted/1000 * 80, 2)}  kg of CO₂.")
 
         if cal_or_bar == "Compare Carbon Emissions (Bar Graph)":
             table_substance = {}
