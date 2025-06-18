@@ -470,7 +470,7 @@ def type_of_calculation():
                 L = (R*math.log(P1/P2))/(1/T2 - 1/T1) #calculate Heat of vaporisation
                 st.info(f"Heat of vaporisation: {L} J/mol")
                 Q̇ = m * L #calculate Rate of transfer of energy
-                st.info(f"Q̇ (Rate of transfer of energy): {round(Q̇/1000, 2)} kJ/unit time")
+                st.info(f"Q̇ (Rate of transfer of energy): {round(Q̇/1000,2)} kJ/unit time")
 
         if calculation == "4. Chemical Reactions":
             percentage = st.number_input("Percentage of reactant converted to product in %: ", min_value=1e-6)
@@ -485,10 +485,10 @@ def type_of_calculation():
                 return
             Q̇ = (percentage/100) *r* enthalpy_change
             if "-" in str(Q̇):
-                st.info(f"Heat removed: {round(Q̇/1000, 3)} kJ/unit time. Hence, since the reaction is exothermic, {round(Q̇/1000, 3)} kJ/unit time needs to be removed to keep the temperature constant in the reactor.") #unit: depends on the unit of time used in mass flow rate
+                st.info(f"Heat removed: {round(Q̇/1000,3)} kJ/unit time. Hence, since the reaction is exothermic, {round(Q̇/1000,3)} kJ/unit time needs to be removed to keep the temperature constant in the reactor.") #unit: depends on the unit of time used in mass flow rate
                 return
             else:
-                st.info(f"Heat added: {round(Q̇/1000, 3)} kJ/unit time. Hence, since the reaction is endothermic, {round(Q̇/1000, 3)} kJ/unit time needs to be added to keep the temperature constant in the reactor.")
+                st.info(f"Heat added: {round(Q̇/1000,3)} kJ/unit time. Hence, since the reaction is endothermic, {round(Q̇/1000, 3)} kJ/unit time needs to be added to keep the temperature constant in the reactor.")
 
         if calculation == "5. Heat Transfer Area of Exchanger":
             Uo_dict = {"Saturated vapor: Boiling liquid": 250, #unit: Btu/hr ft² °F
