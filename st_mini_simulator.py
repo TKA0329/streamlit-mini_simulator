@@ -762,7 +762,9 @@ def type_of_calculation():
             #graph's info
             ax2.set_xlabel("Fuel")
             ax2.set_ylabel("Carbon Emissions (gCO₂/MJ)")
-            ax2.tick_params(axis = "x", labelrotation=20, ha = "right")
+            ax2.tick_params(axis = "x", labelrotation=20)
+            for label in ax1.get_xticklabels():
+                label.set_horizontalalignment('right')
             plot_title = st.text_input("Graph's title: ", key = "C")
             ax2.set_title(f"{plot_title}")
             st.pyplot(fig2)
