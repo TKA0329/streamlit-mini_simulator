@@ -16,7 +16,7 @@ type_of_cal = st.selectbox("Heat Transfer, Reaction Kinetics or Greenhouse Gas I
 def type_of_calculation():
     if type_of_cal == "---Please select---":
         st.subheader("Hello! This is a lightweight, interactive tool to simulate selected introductory concepts in Chemical Engineering.")
-        st.markdown("#### Here, you can explore: \n 1. Reaction kinetics (Zero, First and Second-order reactions; custom molar ratios.)")
+        st.markdown("#### Here, you can explore: \n ##### 1. Reaction kinetics (Zero, First and Second-order reactions; custom molar ratios.)")
 
     if type_of_cal == "Reaction Kinetics":
         st.subheader("Calculating the Rate Constant")
