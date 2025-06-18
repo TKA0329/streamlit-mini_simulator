@@ -187,6 +187,8 @@ def type_of_calculation():
                         st.download_button(label = "Download image", data = buf, file_name = f"{file_name}", mime=f"image/{format}")
                     elif format == "pdf":
                         st.download_button(label = "Download image", data = buf, file_name = f"{file_name}", mime="application/pdf")
+                    else:
+                        return
 
                 elif style == "Animated":
                     if not time:
@@ -231,6 +233,8 @@ def type_of_calculation():
                         anim.save("Kinetics_animation.gif", 
                         writer = "pillow", fps = 2)
                         st.image("Kinetics_animation.gif", caption="Kinetics Animation!")
+                else:
+                    return
         def helper():
             get_k()
             get_conc()
