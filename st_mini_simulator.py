@@ -423,6 +423,7 @@ def type_of_calculation():
                     st.subheader("Data Collection for Graphing")
                     number = st.number_input("How many pieces of data? ", min_value=1.0, key = "s")
                     for i in range(int(number)):
+                        st.markdown(f"##### Data Point {i + 1}")
                         temp_2 = st.number_input("Temperature in K: ", min_value=1e-6, key = f"t{i}")
                         temp_graph_type_2.append(1/temp_2)
                         vapor_pressure = st.number_input("Vapour pressure: ", min_value=1e-6, key=f"g{i}")
