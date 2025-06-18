@@ -185,6 +185,7 @@ def type_of_calculation():
                         buf.seek(0)
                     else:
                         st.warning("Please select a file format.")
+                        return
 
                     file_name = st.text_input("File name: ", value = f"kinetics_plot.{format}")
                     if format == "png" or format == "jpeg":
