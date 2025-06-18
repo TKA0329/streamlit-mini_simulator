@@ -519,8 +519,8 @@ def type_of_calculation():
             if Uo == 0:
                 st.warning("Overall heat transfer coefficient cannot be zero!")
                 return
-            if delta_T2 == 0:
-                st.warning("ΔT2 canot be zero!")
+            if delta_T2 == 0 or delta_T1 == 0:
+                st.warning("ΔT1 and ΔT2 canot be zero!")
                 return
             T_lm = (delta_T1 - delta_T2)/math.log(delta_T1/delta_T2)
             print(f"ΔTlog mean = {T_lm} °F")
