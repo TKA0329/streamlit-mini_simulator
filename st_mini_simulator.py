@@ -11,13 +11,13 @@ import matplotlib.colors as mcolors
 import csv
 
 st.title("Mini Simulator for Reaction Kinetics, Heat Transfer and Greenhouse Gas Impact ")
-type_of_cal = st.selectbox("Heat Transfer or Reaction Kinetics:", ["Heat Transfer", "Reaction Kinetics", "Greenhouse Gas Impact"])
+type_of_cal = st.selectbox("Heat Transfer, Reaction Kinetics or Greenhouse Gas Impact?:", ["---Please select---", "Heat Transfer", "Reaction Kinetics", "Greenhouse Gas Impact"])
 
 def type_of_calculation():
     if type_of_cal == "Reaction Kinetics":
         st.subheader("Calculating the Rate Constant")
         def get_k():
-            calculate_k = st.selectbox("How would you like to calculate k? (Rate and concentration/Arrhenius equation)?", ["Rate and concentration", "Arrhenius equation"])
+            calculate_k = st.selectbox("How would you like to calculate k? (Rate and concentration/Arrhenius equation)?", ["---Please select---", "Rate and concentration", "Arrhenius equation"])
             if calculate_k == "Arrhenius equation":
                 A = st.number_input("A (frequency factor):", min_value=0.0)
                 Ea = st.number_input("Ea (activation energy in J/mol):", min_value=0.0)
@@ -46,7 +46,7 @@ def type_of_calculation():
                 if rate <= 0 or concentration <=0:
                     st.warning("Rate and concentration cannot be less than 0!")
                     return
-                order_selected = st.selectbox("Order with respect to the substance? Please select from the following:", [0.0, 1.0, 2.0])
+                order_selected = st.selectbox("Order with respect to the substance? Please select from the following:", ["---Please select---", 0.0, 1.0, 2.0])
                 k = rate/(concentration ** order_selected)
                 st.session_state.k = k
 
@@ -56,10 +56,10 @@ def type_of_calculation():
 
         def get_conc():
             st.subheader("Information for Plotting Graph")
-            range_or_data = st.selectbox("Plot graph using manually inputted data or auto-generated time values based on the range given?", ["Manually inputted data", "Auto-generate time values based on range given"])
+            range_or_data = st.selectbox("Plot graph using manually inputted data or auto-generated time values based on the range given?", ["---Please select---", "Manually inputted data", "Auto-generate time values based on range given"])
             k = st.session_state.get("k", None)
             A0 = st.number_input("Initial concentration (mol/L):", min_value=0.0)
-            order = st.selectbox("Order of Reaction:", ["Zero", "First", "Second"])
+            order = st.selectbox("Order of Reaction:", ["---Please select---", "Zero", "First", "Second"])
             st.info(f"Order selected: {order} Order")
             st.markdown("##### Product's Information")
             ratio = st.number_input("What is the ratio of the product to the reactant?", min_value = 0.0)
@@ -151,7 +151,7 @@ def type_of_calculation():
                 st.pyplot(fig)
 
             if range_or_data =="Manually inputted data":
-                style = st.selectbox("Animated or static?", ["Static","Animated"])
+                style = st.selectbox("Animated or static?", ["---Please select---", "Static","Animated"])
                 if style == "Static":
                     fig, ax = plt.subplots()
                     y = np.array(R_conc)
@@ -167,7 +167,7 @@ def type_of_calculation():
                     st.pyplot(fig)
 
                     buf = io.BytesIO()
-                    format = st.selectbox("File Format:", ["png", "jpeg", "pdf"])
+                    format = st.selectbox("File Format:", ["---Please select---", "png", "jpeg", "pdf"])
                     fig.savefig(buf, format = format)
                     buf.seek(0)
 
@@ -225,7 +225,7 @@ def type_of_calculation():
             get_conc()
         helper()
     if type_of_cal == "Heat Transfer":
-        calculation = st.selectbox("Choose the type of calculation from the following:", ["1. Sensible Heating or Cooling",
+        calculation = st.selectbox("Choose the type of calculation from the following:", ["---Please select---", "1. Sensible Heating or Cooling",
              "2. Phase Changes with known heat of vaporisation",
              "3. Phase Changes with no known heat of vaporisation (graphing available!)",
              "4. Chemical Reactions",
@@ -244,7 +244,7 @@ def type_of_calculation():
             ṁ_list = []
             feed_stream_list = []
             st.subheader("Calculate Heat Flow or Product Temperature")
-            type_of_cal_SH = st.selectbox("(1) Calculate amount of heat removed/added or (2) temperature of product?", ["Amount of heat removed/added", "Temperature of product"])
+            type_of_cal_SH = st.selectbox("(1) Calculate amount of heat removed/added or (2) temperature of product?", ["---Please select---", "Amount of heat removed/added", "Temperature of product"])
             for i in range(int(n)): #asking for information on the feed stream
                 st.markdown(f"##### Information for feed stream {i + 1}")
                 ṁ = st.number_input(f"Mass flow rate of feed stream {i + 1} in kg/unit time: ") #kg/min or kg/unit time #must not be in moles!
@@ -296,9 +296,9 @@ def type_of_calculation():
             st.info(f"Q̇ (Rate of transfer of energy) = {result} J/min")
 
         if calculation == "3. Phase Changes with no known heat of vaporisation (graphing available!)":
-            ask_user = st.selectbox("(1) Temperature against Pressure graph using the Clausius-Clapeyron Equation or (2) calculate the heat of vaporisation?", ["Temperature against Pressure graph using the Clausius-Clapeyron Equation", "Calculate the heat of vaporisation"])
+            ask_user = st.selectbox("(1) Temperature against Pressure graph using the Clausius-Clapeyron Equation or (2) calculate the heat of vaporisation?", ["---Please select---", "Temperature against Pressure graph using the Clausius-Clapeyron Equation", "Calculate the heat of vaporisation"])
             if ask_user == "Temperature against Pressure graph using the Clausius-Clapeyron Equation":
-                graph_type = st.selectbox("(1) Explore common substances or (2) plot your own graph?", ["Explore common substances", "Plot your own graph"], key = "select_type")
+                graph_type = st.selectbox("(1) Explore common substances or (2) plot your own graph?", ["---Please select---","Explore common substances", "Plot your own graph"], key = "select_type")
                 R = 8.31 #Molar gas constant #in J/(K mol)
 
                 if graph_type == "Explore common substances":
@@ -489,7 +489,7 @@ def type_of_calculation():
                 st.warning("The area cannot be less than zero!")
 
         if calculation == "6. Conduction (Fourier’s law) (graphing available!)":
-            ask_user = st.selectbox("(1) Temperature against Distance graph of different materials or (2) calculate rate of energy transfer? Please type 1 or 2.", ["Temperature against Distance graph of different materials", "Calculate rate of energy transfer"])
+            ask_user = st.selectbox("(1) Temperature against Distance graph of different materials or (2) calculate rate of energy transfer?", ["---Please select---", "Temperature against Distance graph of different materials", "Calculate rate of energy transfer"])
             if ask_user == "Calculate rate of energy transfer":
                 st.subheader("Calculation using the Fourier's Law")
                 T_high = st.number_input("Temperature of high-temperature region in K:", min_value = 1e-6) #unit: K
@@ -555,7 +555,7 @@ def type_of_calculation():
                 st.pyplot(fig)
 
         if calculation == "7. Radiation (Stefan-Boltzmann Law) (graphing available!)":
-            ask_user = st.selectbox("(1) Power against Temperature graph of different materials or (2) calculate rate of energy transfer? Please type 1 or 2.", ["Power against Temperature graph of different materials", "Calculate rate of energy transfer"])
+            ask_user = st.selectbox("(1) Power against Temperature graph of different materials or (2) calculate rate of energy transfer?", ["---Please select---", "Power against Temperature graph of different materials", "Calculate rate of energy transfer"])
             if ask_user == "Calculate rate of energy transfer":
                 st.subheader("Calculation using the Stefan-Boltzmann Law")
                 stefan_boltzmanns_constant = 5.67e-8 #unit: W/m²K⁴
@@ -628,7 +628,7 @@ def type_of_calculation():
             st.info(f"Rate of energy transfer = {rate_of_heat_transfer} W")
     
     if type_of_cal == "Greenhouse Gas Impact":
-        cal_or_bar = st.selectbox("Calculate Amount of Carbon Dioxide and Methane Emitted or Compare Carbon Emissions (Bar Graph)?", ["---Please select---","Compare Carbon Emissions (Bar Graph)", "Calculate Amount of Carbon Dioxide Emitted"])
+        cal_or_bar = st.selectbox("Calculate Amount of Carbon Dioxide and Methane Emitted or Compare Carbon Emissions (Bar Graph)?", ["---Please select---","Compare Carbon Emissions (Bar Graph)", "Calculate Amount of Carbon Dioxide and Methane Emitted"])
         table = [] #preparing a list for appending
         with open("list_of_fuels.csv","r", encoding = "utf-8") as file: #open csv
             reader = csv.DictReader(file)
