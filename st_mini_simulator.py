@@ -277,7 +277,8 @@ def type_of_calculation():
             T_ref = 25
             ṁ_list = []
             feed_stream_list = []
-            st.subheader("Calculate Heat Flow or Product Temperature")
+            st.subheader("Calculate Heat Flow or Product Temperature?")
+            st.warning("Please ensure consistent units are used across all inputs for the calculation to be valid.")
             type_of_cal_SH = st.selectbox("(1) Calculate amount of heat removed/added or (2) temperature of product?", ["---Please select---", "Amount of heat removed/added", "Temperature of product"])
             for i in range(int(n)): #asking for information on the feed stream
                 st.markdown(f"##### Information for feed stream {i + 1}")
