@@ -694,11 +694,11 @@ def type_of_calculation():
                 return
             carbon_emitted = amount_of_energy * mass * carbon_emissions_cal
             st.info(f"{mass}kg of the fuel emitted {round(carbon_emitted/1000,3)}kg of CO₂.")
-            st.info(f"🌳 To offset {round(carbon_emitted/1000,3)}kg of CO₂, you would need approximately {round(carbon_emitted/1000/26.635)} trees!")
+            st.info(f"🌳 To offset {round(carbon_emitted/1000,3)}kg of CO₂, you would need approximately {round(carbon_emitted/1000/26.635)} tree(s)!")
             methane_emissions_cal = st.number_input("Methane emissions in gCH4/MJ: ")
             methane_emitted = amount_of_energy * mass * methane_emissions_cal
             st.info(f"{mass}kg of the fuel emitted {round(methane_emitted/1000,3)}kg of CH₄.")
-            st.info(f"Over a 20-year period, methane is estimated to be 80 times more potent than CO₂ when it comes to warming the planet.\n Hence, the calculated amount of methane is equivalent to {round(methane_emitted/1000 * 80, 2)}  kg of CO₂.")
+            st.info(f"💨 Over a 20-year period, methane is estimated to be 80 times more potent than CO₂ when it comes to warming the planet.\n Hence, the calculated amount of methane is equivalent to {round(methane_emitted/1000 * 80, 2)}  kg of CO₂.")
 
         if cal_or_bar == "Compare Carbon Emissions (Bar Graph)":
             table_substance = {}
