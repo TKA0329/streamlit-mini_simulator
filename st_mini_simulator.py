@@ -16,7 +16,7 @@ type_of_cal = st.selectbox("Heat Transfer, Reaction Kinetics or Greenhouse Gas I
 def type_of_calculation():
     if type_of_cal == "---Please select---":
         st.subheader("Hello! This is a lightweight, interactive tool to simulate selected introductory concepts in Chemical Engineering.")
-        st.markdown("#### Here, you can explore: \n ##### 1. Reaction kinetics (Zero, First and Second-order reactions; custom molar ratios.) \n ##### 2. Heat Transfer Calculations (supports graphing to compare materials in phase changes, conduction and radiation) \n ##### 3. Greenhouse Gas Impact (calculates CO₂ and methane emissions, supports graphing to compare properties of fuels)")
+        st.markdown("#### Here, you can explore: \n ##### 1. Reaction kinetics (supports graphing for Zero, First and Second-order reactions; custom molar ratios.) \n ##### 2. Heat Transfer Calculations (supports graphing to compare materials in phase changes, conduction and radiation) \n ##### 3. Greenhouse Gas Impact (calculates CO₂ and methane emissions, supports graphing to compare properties of fuels)")
         st.markdown("#### Enjoy!")
 
     if type_of_cal == "Reaction Kinetics":
@@ -230,16 +230,17 @@ def type_of_calculation():
             get_conc()
         helper()
     if type_of_cal == "Heat Transfer":
-        calculation = st.selectbox("Choose the type of calculation from the following:", ["---Please select---", "1. Sensible Heating or Cooling",
-             "2. Phase Changes with known heat of vaporisation",
-             "3. Phase Changes with no known heat of vaporisation (graphing available!)",
-             "4. Chemical Reactions",
-             "5. Heat Transfer Area of Exchanger",
-             "6. Conduction (Fourier’s law) (graphing available!)",
-             "7. Radiation (Stefan-Boltzmann Law) (graphing available!)",
-             "8. Convective Heat Transfer"])
+        st.info("Note: The item in brackets shows the parameter this option will calculate.")
+        calculation = st.selectbox("Choose the type of calculation from the following:", ["---Please select---", "1. Sensible Heating or Cooling (heat removed/added or final temperature)",
+             "2. Phase Changes with known heat of vaporisation (Rate of heat transfer)",
+             "3. Phase Changes with no known heat of vaporisation (graphing available!)(Heat of vaporisation + Rate of heat transfer)",
+             "4. Chemical Reactions (heat added/removed)",
+             "5. Heat Transfer Area of Exchanger (area of exchanger)",
+             "6. Conduction - Fourier’s law (graphing available!)(rate of heat transfer)",
+             "7. Radiation - Stefan-Boltzmann Law (graphing available!)(rate of heat transfer)",
+             "8. Convective Heat Transfer (rate of heat transfer)"])
 
-        if calculation == "1. Sensible Heating or Cooling":
+        if calculation == "Sensible Heating or Cooling (heat removed/added or final temperature)":
             n = st.number_input("Number of feed streams: ", min_value = 1.0) #no unit
             hc_product = st.number_input("Specific Heat capacity of product stream in kJ/(kg K) : ", min_value = 1e-6)
             if hc_product == 1e-6:
@@ -294,13 +295,13 @@ def type_of_calculation():
                 st.info(f"Temperature of product: {round(T_product, 2)} celsius")
                 #cannot have curly braces here around T_product! It becomes a set
 
-        if calculation == "2. Phase Changes with known heat of vaporisation":
+        if calculation == "Phase Changes with known heat of vaporisation (Rate of heat transfer)":
             m = st.number_input("Mass flow rate (in kg/min): ", min_value = 1e-6)
             h_vap = st.number_input("Heat of vaporisation (in J/kg): ") #unit: in J/kg
             result = m * h_vap
             st.info(f"Q̇ (Rate of transfer of energy) = {result} J/min")
 
-        if calculation == "3. Phase Changes with no known heat of vaporisation (graphing available!)":
+        if calculation == "Phase Changes with no known heat of vaporisation (graphing available!)(Heat of vaporisation + Rate of heat transfer)":
             ask_user = st.selectbox("(1) Temperature against Pressure graph using the Clausius-Clapeyron Equation or (2) calculate the heat of vaporisation?", ["---Please select---", "Temperature against Pressure graph using the Clausius-Clapeyron Equation", "Calculate the heat of vaporisation"])
             if ask_user == "Temperature against Pressure graph using the Clausius-Clapeyron Equation":
                 graph_type = st.selectbox("(1) Explore common substances or (2) plot your own graph?", ["---Please select---","Explore common substances", "Plot your own graph"], key = "select_type")
@@ -442,7 +443,7 @@ def type_of_calculation():
                 Q̇ = m * L #calculate Rate of transfer of energy
                 st.info(f"Q̇ (Rate of transfer of energy): {round(Q̇/1000, 2)} kJ/unit time")
 
-        if calculation == "4. Chemical Reactions":
+        if calculation == "4. Chemical Reactions (heat added/removed)":
             percentage = st.number_input("Percentage of reactant converted to product in %: ", min_value=1e-6)
             r = st.number_input("Rate at which limiting reactant is consumed (in mol/unit time): ", min_value=1e-6) #unit: in mol/unit time
             enthalpy_change = st.number_input("ΔH (Heat of reaction) in J/mol: ")
@@ -457,7 +458,7 @@ def type_of_calculation():
             else:
                 st.info(f"Heat added: {round(Q̇/1000)} kJ/unit time. Hence, since the reaction is endothermic, {round(Q̇/1000)} kJ/unit time needs to be added to keep the temperature constant in the reactor.")
 
-        if calculation == "5. Heat Transfer Area of Exchanger":
+        if calculation == "5. Heat Transfer Area of Exchanger (area of exchanger)":
             Uo_dict = {"Saturated vapor: Boiling liquid": 250, #unit: Btu/hr ft² °F
                "Saturated vapor: Flowing liquid": 150,
                "Saturated vapor: Vapor": 20,
@@ -493,7 +494,7 @@ def type_of_calculation():
             if A < 0:
                 st.warning("The area cannot be less than zero!")
 
-        if calculation == "6. Conduction (Fourier’s law) (graphing available!)":
+        if calculation == "6. Conduction (Fourier’s law) (graphing available!)(rate of heat transfer)":
             ask_user = st.selectbox("(1) Temperature against Distance graph of different materials or (2) calculate rate of energy transfer?", ["---Please select---", "Temperature against Distance graph of different materials", "Calculate rate of energy transfer"])
             if ask_user == "Calculate rate of energy transfer":
                 st.subheader("Calculation using the Fourier's Law")
@@ -524,7 +525,7 @@ def type_of_calculation():
 
                 table_substance = {}
                 material_names = (name["Material"] for name in table)
-                common_substance = st.multiselect(f"Enter the name of substance:", material_names) #returns list
+                common_substance = st.multiselect(f"Please select one or more items from the list below:", material_names) #returns list
                 st.subheader("Graph")
                 if not common_substance:
                     st.warning("To display the graph, please select at least one item from the table!")
@@ -559,7 +560,7 @@ def type_of_calculation():
                 ax.legend()
                 st.pyplot(fig)
 
-        if calculation == "7. Radiation (Stefan-Boltzmann Law) (graphing available!)":
+        if calculation == "7. Radiation (Stefan-Boltzmann Law) (graphing available!)(rate of heat transfer)":
             ask_user = st.selectbox("(1) Power against Temperature graph of different materials or (2) calculate rate of energy transfer?", ["---Please select---", "Power against Temperature graph of different materials", "Calculate rate of energy transfer"])
             if ask_user == "Calculate rate of energy transfer":
                 st.subheader("Calculation using the Stefan-Boltzmann Law")
@@ -590,7 +591,7 @@ def type_of_calculation():
 
                 table_substance = {}
                 material_names = (name["Material"] for name in table)
-                common_substance = st.multiselect(f"Enter the name of substance:", material_names) #returns list
+                common_substance = st.multiselect(f"Please select one or more items from the list below:", material_names) #returns list
                 st.subheader("Graph")
                 if not common_substance:
                     st.warning("To display the graph, please select at least one item from the table!")
@@ -624,7 +625,7 @@ def type_of_calculation():
                 ax.legend()
                 st.pyplot(fig)
 
-        if calculation == "8. Convective Heat Transfer":
+        if calculation == "8. Convective Heat Transfer (rate of heat transfer)":
             st.subheader("Calculation: P = hAΔT")
             A = st.number_input("Surface Area (A):", min_value = 1e-6) #unit: m²
             h = st.number_input("Convective heat transfer coefficient (h):", min_value = 0.0) #unit: W/(m²K)
@@ -665,7 +666,7 @@ def type_of_calculation():
         if cal_or_bar == "Compare Carbon Emissions (Bar Graph)":
             table_substance = {}
             material_names = (name["Fuel"] for name in table)
-            common_substance = st.multiselect(f"Enter the name of substance:", material_names) #returns list
+            common_substance = st.multiselect(f"Please select one or more items from the list below:", material_names) #returns list
             st.subheader("Graph")
             
             if not common_substance:
