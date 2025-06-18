@@ -63,7 +63,8 @@ def type_of_calculation():
 
         def get_conc():
             st.subheader("Information for Plotting Graph")
-            range_or_data = st.selectbox("Plot graph using manually inputted data or auto-generated time values based on the range given?", ["---Please select---", "Manually inputted data", "Auto-generate time values based on range given"])
+            range_or_data = st.selectbox("Plot graph using manually inputted data or auto-generated time values based on the range given?", 
+                                         ["---Please select---", "Manually inputted data (download and animation available!)", "Auto-generate time values based on range given"])
             k = st.session_state.get("k", None)
             A0 = st.number_input("Initial concentration (mol/L):", min_value=0.0)
             order = st.selectbox("Order of Reaction:", ["---Please select---", "Zero", "First", "Second"])
@@ -75,7 +76,7 @@ def type_of_calculation():
             st.markdown("##### Product's Information")
             ratio = st.number_input("What is the ratio of the product to the reactant?", min_value = 0.0)
 
-            if range_or_data == "Manually inputted data":
+            if range_or_data == "Manually inputted data (download and animation available!)":
                 st.markdown("##### Fill in Time Values to Calculate Concentrations")
                 n = st.number_input("Number of times to calculate concentration:", min_value=1.0)
                 time  = []
@@ -161,7 +162,7 @@ def type_of_calculation():
                 ax.legend()
                 st.pyplot(fig)
 
-            if range_or_data =="Manually inputted data":
+            if range_or_data =="Manually inputted data (download and animation available!)":
                 style = st.selectbox("Animated or static?", ["---Please select---", "Static","Animated"])
                 if style == "Static":
                     fig, ax = plt.subplots()
@@ -184,7 +185,7 @@ def type_of_calculation():
                         fig.savefig(buf, format = format)
                         buf.seek(0)
                     else:
-                        st.warning("Please select a file format.")
+                        st.warning("Please select a file format to proceed.")
                         return
 
                     file_name = st.text_input("File name: ", value = f"kinetics_plot.{format}")
