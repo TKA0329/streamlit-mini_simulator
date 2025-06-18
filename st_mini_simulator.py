@@ -738,7 +738,7 @@ def type_of_calculation():
             #graph's info
             ax1.set_xlabel("Fuel")
             ax1.set_ylabel("Energy Content (MJ/kg)")
-            ax1.tick_params(axis = "x", labelrotation=45)
+            ax1.tick_params(axis = "x", labelrotation=30)
             plot_title = st.text_input("Graph's title: ", key = "F")
             ax1.set_title(f"{plot_title}")
             st.pyplot(fig1)
@@ -762,7 +762,7 @@ def type_of_calculation():
             #graph's info
             ax2.set_xlabel("Fuel")
             ax2.set_ylabel("Carbon Emissions (gCO₂/MJ)")
-            ax2.tick_params(axis = "x", labelrotation=45)
+            ax2.tick_params(axis = "x", labelrotation=30)
             plot_title = st.text_input("Graph's title: ", key = "C")
             ax2.set_title(f"{plot_title}")
             st.pyplot(fig2)
