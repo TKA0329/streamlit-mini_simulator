@@ -454,6 +454,7 @@ def type_of_calculation():
                     st.pyplot(fig)
 
             if ask_user == "Calculate the heat of vaporisation and rate of heat transfer":
+                st.warning("Please ensure consistent units are used across all inputs for the calculation to be valid.")
                 st.markdown("##### Temperature")
                 T1 = st.number_input("Temperature (T1) in K: ", min_value = 0) #in Kelvin
                 T2 = st.number_input("Temperature (T2) in K: ", min_value = 0) #in Kelvin
