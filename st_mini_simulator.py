@@ -330,7 +330,8 @@ def type_of_calculation():
             st.info(f"Q̇ (Rate of transfer of energy) = {result} J/min")
 
         if calculation == "3. Phase Changes with no known heat of vaporisation":
-            ask_user = st.selectbox("(1) Temperature against Pressure graph using the Clausius-Clapeyron Equation or (2) calculate the heat of vaporisation?", ["---Please select---", "Temperature against Pressure graph using the Clausius-Clapeyron Equation", "Calculate the heat of vaporisation"])
+            ask_user = st.selectbox("(1) Temperature against Pressure graph using the Clausius-Clapeyron Equation or (2) Calculate the heat of vaporisation and rate of heat transfer?", 
+                                    ["---Please select---", "Temperature against Pressure graph using the Clausius-Clapeyron Equation", "Calculate the heat of vaporisation and rate of heat transfer"])
             if ask_user == "Temperature against Pressure graph using the Clausius-Clapeyron Equation":
                 graph_type = st.selectbox("(1) Explore common substances or (2) plot your own graph?", ["---Please select---","Explore common substances", "Plot your own graph"], key = "select_type")
                 R = 8.31 #Molar gas constant #in J/(K mol)
@@ -423,7 +424,7 @@ def type_of_calculation():
                     for i in range(int(number)):
                         temp_2 = st.number_input("Temperature in K: ", min_value=1e-6, key = f"t{i}")
                         temp_graph_type_2.append(1/temp_2)
-                        vapor_pressure = st.number_input("Vapor pressure: ", min_value=1e-6, key=f"g{i}")
+                        vapor_pressure = st.number_input("Vapour pressure: ", min_value=1e-6, key=f"g{i}")
                         vp_graph_type_2.append(math.log(vapor_pressure))
                     #plots graph with line of best fit
                     fig, ax = plt.subplots()
@@ -450,18 +451,18 @@ def type_of_calculation():
                     ax.legend()
                     st.pyplot(fig)
 
-            if ask_user == "Calculate the heat of vaporisation":
+            if ask_user == "Calculate the heat of vaporisation and rate of heat transfer":
                 st.markdown("##### Temperature")
                 T1 = st.number_input("Temperature (T1) in K: ", min_value = 0) #in Kelvin
                 T2 = st.number_input("Temperature (T2) in K: ", min_value = 0) #in Kelvin
                 if T1 == 0 or T2 == 0:
                     st.warning("Temperature cannot be less than or equal to 0!")
                     return
-                st.markdown("##### Pressure")
+                st.markdown("##### Vapour Pressure")
                 P1 = st.number_input(f"Vapour pressure at {T1}K: ", min_value = 0) #any unit
                 P2 = st.number_input(f"Vapour pressure at {T2}K: ", min_value = 0) #any unit
                 if P1 == 0 or P2 == 0:
-                    st.warning("Pressure cannot be less than or equal to zero!")
+                    st.warning("Vapour pressure cannot be less than or equal to zero!")
                     return
                 st.markdown("##### Mass Flow Rate")
                 m = st.number_input("Mass flow rate in mol/unit time: ", min_value = 0) # unit: mol/unit time
@@ -479,12 +480,15 @@ def type_of_calculation():
                 return
             if percentage == 1e-6 or r == 1e-6  or enthalpy_change == 1e-6:
                 return
+            if percentage > 100:
+                st.warning("The percentage cannot be greater than 100!")
+                return
             Q̇ = (percentage/100) *r* enthalpy_change
             if "-" in str(Q̇):
-                st.info(f"Heat removed: {round(Q̇/1000)} kJ/unit time. Hence, since the reaction is exothermic, {round(Q̇/1000)} kJ/unit time needs to be removed to keep the temperature constant in the reactor.") #unit: depends on the unit of time used in mass flow rate
+                st.info(f"Heat removed: {round(Q̇/1000),3} kJ/unit time. Hence, since the reaction is exothermic, {round(Q̇/1000),3} kJ/unit time needs to be removed to keep the temperature constant in the reactor.") #unit: depends on the unit of time used in mass flow rate
                 return
             else:
-                st.info(f"Heat added: {round(Q̇/1000)} kJ/unit time. Hence, since the reaction is endothermic, {round(Q̇/1000)} kJ/unit time needs to be added to keep the temperature constant in the reactor.")
+                st.info(f"Heat added: {round(Q̇/1000),3} kJ/unit time. Hence, since the reaction is endothermic, {round(Q̇/1000),3} kJ/unit time needs to be added to keep the temperature constant in the reactor.")
 
         if calculation == "5. Heat Transfer Area of Exchanger":
             Uo_dict = {"Saturated vapor: Boiling liquid": 250, #unit: Btu/hr ft² °F
