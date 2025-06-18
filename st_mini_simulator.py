@@ -187,7 +187,7 @@ def type_of_calculation():
                         st.download_button(label = "Download image", data = buf, file_name = f"{file_name}", mime=f"image/{format}")
                     elif format == "pdf":
                         st.download_button(label = "Download image", data = buf, file_name = f"{file_name}", mime="application/pdf")
-                    else:
+                    elif format == "---Please select---":
                         return
 
                 elif style == "Animated":
