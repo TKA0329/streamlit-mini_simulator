@@ -685,7 +685,7 @@ def type_of_calculation():
         st.write("Note: ☘️ means it is a renewable energy!")
         
         if cal_or_bar == "Calculate Amount of Carbon Dioxide and Methane Emitted":
-            st.subheader("Amount of Carbon Dioxide Emitted Calculator")
+            st.subheader("Amount of Carbon Dioxide and Methane Emitted Calculator")
             amount_of_energy = st.number_input("Based on the table above or your own value, energy content of the fuel (MJ/kg):", min_value = 0.0)
             mass = st.number_input("Mass of the fuel consumed (kg): ", min_value = 0.0)
             carbon_emissions_cal = st.number_input("Based on the table above or your own value, carbon emissions (gCO₂/MJ): ", min_value = 0.0)
@@ -763,8 +763,6 @@ def type_of_calculation():
             ax2.set_xlabel("Fuel")
             ax2.set_ylabel("Carbon Emissions (gCO₂/MJ)")
             ax2.tick_params(axis = "x", labelrotation=20)
-            for label in ax1.get_xticklabels():
-                label.set_horizontalalignment('right')
             plot_title = st.text_input("Graph's title: ", key = "C")
             ax2.set_title(f"{plot_title}")
             st.pyplot(fig2)
