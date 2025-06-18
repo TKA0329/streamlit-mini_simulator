@@ -628,7 +628,7 @@ def type_of_calculation():
             st.info(f"Rate of energy transfer = {rate_of_heat_transfer} W")
     
     if type_of_cal == "Greenhouse Gas Impact":
-        cal_or_bar = st.selectbox("---Please select---","Calculate Amount of Carbon Dioxide and Methane Emitted or Compare Carbon Emissions (Bar Graph)?", ["Compare Carbon Emissions (Bar Graph)", "Calculate Amount of Carbon Dioxide Emitted"])
+        cal_or_bar = st.selectbox("Calculate Amount of Carbon Dioxide and Methane Emitted or Compare Carbon Emissions (Bar Graph)?", ["---Please select---","Compare Carbon Emissions (Bar Graph)", "Calculate Amount of Carbon Dioxide Emitted"])
         table = [] #preparing a list for appending
         with open("list_of_fuels.csv","r", encoding = "utf-8") as file: #open csv
             reader = csv.DictReader(file)
